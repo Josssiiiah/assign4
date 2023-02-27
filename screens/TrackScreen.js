@@ -1,23 +1,32 @@
-import { SafeAreaView, StyleSheet, Text, View, Image } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+} from "react-native";
 import SongList from "../components/SongList";
+import { Ionicons } from "@expo/vector-icons";
+
 import { Images } from "../assets/Themes";
 
-const tracksScreen = ({ tracks }) => {
+const { width: windowWidth } = Dimensions.get("window");
+
+const TrackScreen = ({ navigation, tracks }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerContainer}>
-        <Image source={Images.spotify} style={styles.Logo} />
+        <Image source={Images.spotify} style={styles.headerLogo} />
         <View style={{ width: 6 }} />
         <Text style={styles.headerText}>My Top Tracks</Text>
       </View>
-      <View style={styles.listContainer}>
-        <SongList tracks={tracks} />
-      </View>
+      <SongList navigation={navigation} tracks={tracks} />
     </SafeAreaView>
   );
 };
 
-export default tracksScreen;
+export default TrackScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontStyle: "bold",
   },
-  Logo: {
+  headerLogo: {
     width: 20,
     height: 20,
   },

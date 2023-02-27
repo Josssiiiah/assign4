@@ -1,6 +1,14 @@
-import { Text, StyleSheet, View, Image, Dimensions } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  Dimensions,
+  Pressable,
+} from "react-native";
 import { Themes } from "../assets/Themes";
 import { millisToMinutesAndSeconds } from "../utils";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const { width: windowWidth } = Dimensions.get("window");
 
@@ -11,15 +19,36 @@ const Song = ({
   duration,
   index,
   songArtists,
+  preview,
+  externalUrl,
+  navigation,
 }) => {
   return (
     <View style={styles.songItemContainer}>
-      <Text style={styles.songIndex}>{index}</Text>
+      <Pressable
+        onPress={(e) => {
+          e.stopPropagation();
+          navigation.navigate("PreviewScreen", { url: preview });
+        }}
+      >
+        <MaterialIcons
+          name="play-circle-fill"
+          size={24}
+          color={Themes.colors.spotify}
+        />
+      </Pressable>
       <Image style={styles.albumImage} source={{ uri: imageUrl }} />
       <View style={styles.songNameContainer}>
-        <Text numberOfLines={1} style={styles.songTitle}>
-          {songTitle}
-        </Text>
+        <Pressable
+          onPress={(e) => {
+            e.stopPropagation();
+            navigation.navigate("DetailScreen", { url: externalUrl });
+          }}
+        >
+          <Text numberOfLines={1} style={styles.songTitle}>
+            {songTitle}
+          </Text>
+        </Pressable>
         <Text numberOfLines={1} style={styles.songArtist}>
           {songArtists[0].name}
         </Text>

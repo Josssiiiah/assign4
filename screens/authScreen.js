@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import SpotifyAuthButton from "../components/SpotifyAuthButton";
 
-const authScreen = ({ authFn }) => {
+const AuthScreen = ({ authFn }) => {
   return (
     <View>
       <SpotifyAuthButton authFn={authFn} />
@@ -10,4 +10,4 @@ const authScreen = ({ authFn }) => {
   );
 };
 
-export default authScreen;
+export default AuthScreen;

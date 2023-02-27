@@ -1,26 +1,27 @@
-import { FlatList, Text, StyleSheet, View, Dimensions } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
+import React from "react";
 import { Themes } from "../assets/Themes";
 import Song from "./Song";
 
-const SongList = ({ tracks }) => {
+const SongList = ({ navigation, tracks }) => {
   return (
     <FlatList
       data={tracks}
       renderItem={({ item, index }) => {
         return (
           <Song
-            index={index}
+            navigation={navigation}
             imageUrl={item.imageUrl}
             songTitle={item.songTitle}
             albumName={item.albumName}
             duration={item.duration}
             songArtists={item.songArtists}
+            previewUrl={item.previewUrl}
+            externalUrl={item.externalUrl}
           />
         );
       }}
-      keyExtractor={(item, index) => {
-        return item.id;
-      }}
+      keyExtractor={(item) => item.id}
     />
   );
 };
